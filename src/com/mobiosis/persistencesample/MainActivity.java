@@ -4,10 +4,13 @@ import java.sql.SQLException;
 import java.util.List;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.AsyncTaskLoader;
+import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.text.TextUtils;
@@ -22,16 +25,16 @@ import android.widget.TextView;
 import com.mobiosis.persistencesample.data.Globals;
 import com.mobiosis.persistencesample.data.MyPreferences;
 import com.mobiosis.persistencesample.data.SQLiteHelper;
+import com.mobiosis.persistencesample.data.SampleProvider;
 import com.mobiosis.persistencesample.model.MyUser;
 
 public class MainActivity extends FragmentActivity 
-//implements LoaderCallbacks<Cursor>
-implements LoaderCallbacks<List<MyUser>>
+implements LoaderCallbacks<Cursor>
 {
 
 	private MyUser mUser;
 	private MyPreferences mPreferences;
-	private SimpleCursorAdapter mCursorAdapter;
+	private SimpleCursorAdapter mAdapter;
 	private ArrayAdapter<MyUser> mListAdapter;
 	private ListView mList;
 
@@ -79,26 +82,13 @@ implements LoaderCallbacks<List<MyUser>>
 	
 	private void initList() {
         // Create an empty adapter we will use to display the loaded data.
-        mCursorAdapter = new SimpleCursorAdapter(this,
+        mAdapter = new SimpleCursorAdapter(this,
                 android.R.layout.simple_list_item_2, null,
                 new String[] { MyUser.USER_NAME, MyUser.AGE },
                 new int[] { android.R.id.text1, android.R.id.text2}, 0);
         
-        mListAdapter = new ArrayAdapter<MyUser>(this, android.R.layout.simple_expandable_list_item_2, android.R.id.text1) {
-        	@Override
-        	public View getView(int position, View convertView, ViewGroup parent) {
-        		View v = super.getView(position, convertView, parent);
-        		((TextView)v.findViewById(android.R.id.text1)).setText(getItem(position).getUserName());
-        		((TextView)v.findViewById(android.R.id.text2)).setText(
-        				getItem(position).getAge() + ", " + getItem(position).getGender().name() 
-//        				+ ", " + getItem(position).getCountry()
-        				);
-        		return v;
-        	}
-        };
-
         mList = (ListView)findViewById(R.id.list);
-        mList.setAdapter(mListAdapter);
+        mList.setAdapter(mAdapter);
         
         // Prepare the loader.  Either re-connect with an existing one,
         // or start a new one.
@@ -123,67 +113,26 @@ implements LoaderCallbacks<List<MyUser>>
 		return super.onMenuItemSelected(featureId, item);
 	}
 
-//	@Override
-//	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
-//		
-//		return new CursorLoader(this,
-//				Uri.withAppendedPath(SampleProvider.getUri(), SQLiteHelper.DatabaseType.USERS.name()),
-//				SQLiteHelper.sUsersColumns.keySet().toArray(new String[]{}), 
-//				null, null,null);
-//	}
-//	
-//	@Override
-//	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-//		mAdapter.changeCursor(cursor);
-//		mAdapter.notifyDataSetChanged();
-//	}
-//
-//	@Override
-//	public void onLoaderReset(Loader<Cursor> loader) {
-//		// TODO Auto-generated method stub
-//		
-//	}
+	@Override
+	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
+		
+		return new CursorLoader(this,
+				Uri.withAppendedPath(SampleProvider.getUri(), SQLiteHelper.DatabaseType.USERS.name()),
+				SQLiteHelper.sUsersColumns.keySet().toArray(new String[]{}), 
+				null, null,null);
+	}
 	
-	public Loader<List<MyUser>> onCreateLoader(int arg0, Bundle arg1) {
-		return new AsyncTaskLoader<List<MyUser>>(this) {
-			
-			@Override
-			protected void onStartLoading() {
-				super.onStartLoading();
-				
-				forceLoad();
-			}
-			
-			@Override
-			protected List<MyUser> onLoadInBackground() {
-				return loadInBackground();
-			}
-
-			@Override
-			public List<MyUser> loadInBackground() {
-				//using the DAO
-				SQLiteHelper helper = SQLiteHelper.getInstance(getApplicationContext());
-				try {
-					return helper.getUsers().queryForAll();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				return null;
-			}
-		};
+	@Override
+	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+		mAdapter.changeCursor(cursor);
+		mAdapter.notifyDataSetChanged();
 	}
 
 	@Override
-	public void onLoadFinished(Loader<List<MyUser>> loader, List<MyUser> list) {
-		mListAdapter.clear();
-		mListAdapter.addAll(list);
-		mListAdapter.notifyDataSetChanged();
-	}
-
-	@Override
-	public void onLoaderReset(Loader<List<MyUser>> arg0) {
+	public void onLoaderReset(Loader<Cursor> loader) {
 		// TODO Auto-generated method stub
+		
 	}
+
 
 }
