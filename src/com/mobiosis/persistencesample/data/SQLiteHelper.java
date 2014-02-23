@@ -7,11 +7,11 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.BaseColumns;
 
-import com.mobiosis.persistencesample.model.MyUser;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+import com.mobiosis.persistencesample.model.MyUser;
 
 public class SQLiteHelper 
 	//extends SQLiteOpenHelper 
@@ -22,7 +22,7 @@ public class SQLiteHelper
 	private enum DbVersion {
 		Preinit, //ignore, we just need to start from 1
 		Init,
-		Update1, //added column "country"
+//		Update1, //added column "country"
 //		Update2,
 		
 		//insert next versions above

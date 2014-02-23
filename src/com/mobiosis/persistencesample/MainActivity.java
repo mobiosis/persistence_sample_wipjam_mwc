@@ -177,8 +177,10 @@ implements LoaderCallbacks<List<MyUser>>
 	@Override
 	public void onLoadFinished(Loader<List<MyUser>> loader, List<MyUser> list) {
 		mListAdapter.clear();
-		mListAdapter.addAll(list);
-		mListAdapter.notifyDataSetChanged();
+		if (list != null && list.size() > 0) {
+			mListAdapter.addAll(list);
+			mListAdapter.notifyDataSetChanged();
+		}
 	}
 
 	@Override
