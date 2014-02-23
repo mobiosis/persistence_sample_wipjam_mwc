@@ -16,14 +16,18 @@ public class SampleProvider extends ContentProvider {
 	public static final String AUTHORITY = SampleProvider.class.getName();
 	private SQLiteHelper mSQLiteHelper;
 
-	private static UriMatcher sUriMatcher = new UriMatcher(DatabaseType.USERS.ordinal());
+	private static UriMatcher sUriMatcher = 
+			new UriMatcher(DatabaseType.USERS.ordinal());
 	static {
-		sUriMatcher.addURI(AUTHORITY, DatabaseType.USERS.toString(), DatabaseType.USERS.ordinal());
+		sUriMatcher.addURI(AUTHORITY, 
+				DatabaseType.USERS.toString(), 
+				DatabaseType.USERS.ordinal());
 	}
 	
 	@Override
 	public boolean onCreate() {
-		mSQLiteHelper = SQLiteHelper.getInstance(getContext().getApplicationContext());
+		mSQLiteHelper = SQLiteHelper.getInstance(
+				getContext().getApplicationContext());
 		return true;
 	}
 	
@@ -59,15 +63,18 @@ public class SampleProvider extends ContentProvider {
 			DatabaseType dt = DatabaseType.values()[typeId];
 			switch(dt) {
 				case USERS:
-					rowId = db.insert(DatabaseType.USERS.name(), MyUser.USER_NAME, values);
+					rowId = db.insert(DatabaseType.USERS.name(), 
+							MyUser.USER_NAME, values);
 					break;
 			}
 		}
 
 		if (rowId > 0)
 		{//inform observers about the change in the database
-			Uri uriRowInserted = ContentUris.withAppendedId(uri, rowId);
-			getContext().getContentResolver().notifyChange(uriRowInserted, null);
+			Uri uriRowInserted = ContentUris.withAppendedId(
+					uri, rowId);
+			getContext().getContentResolver().notifyChange(
+					uriRowInserted, null);
 			return uriRowInserted;
 		}
 		return null;
