@@ -5,11 +5,6 @@ import java.util.ArrayList;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
-
-
-@DatabaseTable
 public class MyUser implements Parcelable {
 	
 	public static final String USER_NAME = "user_name";
@@ -23,11 +18,8 @@ public class MyUser implements Parcelable {
 	};
 	
 	//@SerializedName("custom_user_name")
-	@DatabaseField
 	private String mUserName;
-	@DatabaseField
 	private int mAge;
-	@DatabaseField
 	private Gender mGender;
 
 	//
