@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">PersistenceSample</string>
+    
+    <string name="action_settings">Settings</string>
+    <string name="action_add">Add Person</string>
+    <string name="action_sort">Sort</string>
+    
+    <string name="hello_world">Hello %1$s</string>
+
+    <string name="gender_male">Male</string>
+    <string name="gender_female">Female</string>
+    <string-array name="gender">
+        <item>@string/gender_male</item>
+        <item>@string/gender_female</item>
+    </string-array>
+    
+    <string name="sort_by_id">Sort by ID</string>
+    <string name="sort_by_name">Sort by Name</string>
+    <string name="sort_by_age">Sort by Age</string>
+    <string name="sort_by_gender">Sort by Gender</string>
+    <string-array name="sort_order">
+        <item>@string/sort_by_id</item>
+        <item>@string/sort_by_name</item>
+        <item>@string/sort_by_age</item>
+        <item>@string/sort_by_gender</item>
+    </string-array>
+    
+    <string name="add_person">Add</string>
+</resources>

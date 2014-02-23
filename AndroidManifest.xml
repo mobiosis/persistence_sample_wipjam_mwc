@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mobiosis.persistencesample"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="18" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.mobiosis.persistencesample.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <activity 
+            android:name="AccountActivity"
+            />
+        <activity 
+            android:name="AccountSuccessActivity"
+            />
+        <activity 
+            android:name="LoginActivity"
+            />
+        <activity 
+            android:name="LoginSuccessActivity"
+            />
+
+        <provider
+	        android:name="com.mobiosis.persistencesample.data.SampleProvider"
+	        android:authorities="com.example.persistencesample.data.SampleProvider"
+	        android:exported="false"
+	        />
+    </application>
+    
+
+</manifest>
