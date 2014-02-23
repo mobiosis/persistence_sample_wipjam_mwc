@@ -1,7 +1,5 @@
 package com.mobiosis.persistencesample;
 
-import java.sql.SQLException;
-
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -51,7 +49,11 @@ public class AccountSuccessActivity extends Activity {
 		values.put(MyUser.GENDER, user.getGender().ordinal());
 		
 		cr.insert(
-				Uri.withAppendedPath(SampleProvider.getUri(), SQLiteHelper.DatabaseType.USERS.name()), 
+				Uri.withAppendedPath(SampleProvider.getUri(), 
+						SQLiteHelper.DatabaseType.USERS.name()), 
 				values);
+		
+		//we could also insert multiple users at once
+		//cr.bulkInsert(url, values)
 	}
 }

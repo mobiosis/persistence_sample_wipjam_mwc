@@ -1,6 +1,5 @@
 package com.mobiosis.persistencesample.data;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 
 import android.content.Context;
@@ -9,10 +8,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 
 import com.mobiosis.persistencesample.model.MyUser;
-import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
-import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.support.ConnectionSource;
-import com.j256.ormlite.table.TableUtils;
 
 public class SQLiteHelper 
 	extends SQLiteOpenHelper 
@@ -88,7 +83,7 @@ public class SQLiteHelper
 
 			//add new column
 			db.execSQL("ALTER TABLE " + DatabaseType.USERS.name() /*this is the name of the table*/  
-					+ " ADD COLUMN "+ MyUser.COUNTRY +" TEXT default 'Poland'"
+					+ " ADD COLUMN "+ MyUser.COUNTRY +" TEXT default 'Lalaland'"
 					);
 			
 			db.setTransactionSuccessful();

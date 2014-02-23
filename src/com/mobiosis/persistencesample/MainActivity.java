@@ -1,23 +1,17 @@
 package com.mobiosis.persistencesample;
 
-import java.sql.SQLException;
-import java.util.List;
-
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
-import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -117,7 +111,8 @@ implements LoaderCallbacks<Cursor>
 	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
 		
 		return new CursorLoader(this,
-				Uri.withAppendedPath(SampleProvider.getUri(), SQLiteHelper.DatabaseType.USERS.name()),
+				Uri.withAppendedPath(SampleProvider.getUri(), 
+						SQLiteHelper.DatabaseType.USERS.name()),
 				SQLiteHelper.sUsersColumns.keySet().toArray(new String[]{}), 
 				null, null,null);
 	}
