@@ -38,7 +38,7 @@
 
         <provider
 	        android:name="com.mobiosis.persistencesample.data.SampleProvider"
-	        android:authorities="com.example.persistencesample.data.SampleProvider"
+	        android:authorities="com.mobiosis.persistencesample.data.SampleProvider"
 	        android:exported="false"
 	        />
     </application>
