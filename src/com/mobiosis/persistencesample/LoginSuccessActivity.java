@@ -31,8 +31,10 @@ public class LoginSuccessActivity extends Activity {
 
 				storeUser(name, age, gender);
 				
-				startActivity(new Intent(LoginSuccessActivity.this, 
-						MainActivity.class));
+				Intent i = new Intent(LoginSuccessActivity.this, 
+						MainActivity.class);
+				i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(i);
 				finish();
 			}
 		});

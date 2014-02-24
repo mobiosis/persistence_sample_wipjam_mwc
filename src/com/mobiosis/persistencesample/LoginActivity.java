@@ -103,6 +103,9 @@ public class LoginActivity extends Activity {
 //		user.setAge(age);
 //		user.setGender(gender);
 //		intent.putExtra("MyUser", user);
+		
+		finish();
+
 	}
 
 }

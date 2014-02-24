@@ -77,7 +77,7 @@ implements LoaderCallbacks<List<MyUser>>
 	@Override
 	protected void onRestoreInstanceState(Bundle savedInstanceState) {
 		super.onRestoreInstanceState(savedInstanceState);
-	}
+	}	
 
 	private boolean isUserSet() {
 		if (Globals.SIMPLE_PREFERENCES) return !TextUtils.isEmpty(mPreferences.getUserName());

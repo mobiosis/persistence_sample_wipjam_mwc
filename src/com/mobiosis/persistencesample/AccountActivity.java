@@ -75,6 +75,7 @@ public class AccountActivity extends Activity {
 //		intent.putParcelableArrayListExtra("MyUser[]", list);
 
 		startActivity(intent);		
+		finish();
 	}
 	
 	@Override
