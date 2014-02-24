@@ -115,7 +115,7 @@ public class SQLiteHelper
 
 			//add new column
 			db.execSQL("ALTER TABLE " + MyUser.class.getSimpleName().toLowerCase() /*this is the name of the table*/  
-					+ " ADD COLUMN "+ MyUser.COUNTRY +" TEXT default 'Poland'"
+					+ " ADD COLUMN "+ MyUser.COUNTRY +" TEXT default 'Lalaland'"
 					);
 			
 			db.setTransactionSuccessful();
