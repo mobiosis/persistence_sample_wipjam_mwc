@@ -23,6 +23,7 @@ public class LoginSuccessActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
+				//obtatining the user data from the intent
 				String name = getIntent().getStringExtra("MyUser.name");
 				int age = getIntent().getIntExtra("MyUser.age", 0);
 				Gender gender = (Gender) 

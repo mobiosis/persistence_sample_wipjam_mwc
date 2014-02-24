@@ -4,9 +4,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.google.gson.Gson;
 import com.mobiosis.persistencesample.model.MyUser;
 import com.mobiosis.persistencesample.model.MyUser.Gender;
-import com.google.gson.Gson;
 
 public class MyPreferences {
 	
@@ -19,7 +19,9 @@ public class MyPreferences {
 	synchronized public static MyPreferences getInstance(Context context) {
 		if (mInstance == null) {
 			mInstance = new MyPreferences();
-			mInstance.mPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+			mInstance.mPreferences = PreferenceManager
+					.getDefaultSharedPreferences(context);
+			//context.getSharedPreferences(name, mode)
 			mInstance.mEditor = mInstance.mPreferences.edit();
 		}
 		return mInstance;
@@ -42,7 +44,8 @@ public class MyPreferences {
 	}
 	
 	public Gender getGender() {
-		String genderName = mPreferences.getString("MyUser.gender", Gender.Male.name());
+		String genderName = mPreferences
+				.getString("MyUser.gender", Gender.Male.name());
 		if (Gender.Female.name().equals(genderName)) {
 			return Gender.Female;
 		}
