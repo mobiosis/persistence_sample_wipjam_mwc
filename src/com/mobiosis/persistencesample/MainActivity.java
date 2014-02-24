@@ -10,6 +10,7 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -35,7 +36,6 @@ implements LoaderCallbacks<Cursor>
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
 		
 		mPreferences = MyPreferences.getInstance(getApplicationContext());
 		
@@ -44,6 +44,15 @@ implements LoaderCallbacks<Cursor>
 			finish();
 			return;
 		}
+        
+        setContentView(R.layout.activity_main);
+        mList = (ListView)findViewById(R.id.list);
+        
+        if (savedInstanceState != null) {
+            Log.d(MainActivity.class.getName(), "onRestore");
+            mList.onRestoreInstanceState(savedInstanceState.getParcelable("mList"));
+            Log.d(MainActivity.class.getName(), "restored");
+        }
 	}
 	
 	@Override
@@ -56,6 +65,16 @@ implements LoaderCallbacks<Cursor>
 
 	}
 	
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable("mList", mList.onSaveInstanceState());
+    }
+    
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+    }
 
 	private boolean isUserSet() {
 		if (Globals.SIMPLE_PREFERENCES) return !TextUtils.isEmpty(mPreferences.getUserName());
@@ -81,7 +100,6 @@ implements LoaderCallbacks<Cursor>
                 new String[] { MyUser.USER_NAME, MyUser.AGE },
                 new int[] { android.R.id.text1, android.R.id.text2}, 0);
         
-        mList = (ListView)findViewById(R.id.list);
         mList.setAdapter(mAdapter);
         
         // Prepare the loader.  Either re-connect with an existing one,
