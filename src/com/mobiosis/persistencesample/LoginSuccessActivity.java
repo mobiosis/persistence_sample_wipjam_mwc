@@ -30,9 +30,10 @@ public class LoginSuccessActivity extends Activity {
 						getIntent().getSerializableExtra("MyUser.gender");
 
 				storeUser(name, age, gender);
-				
-				startActivity(new Intent(LoginSuccessActivity.this, 
-						MainActivity.class));
+				Intent intent = new Intent(LoginSuccessActivity.this, 
+						MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(intent);
 				finish();
 			}
 		});

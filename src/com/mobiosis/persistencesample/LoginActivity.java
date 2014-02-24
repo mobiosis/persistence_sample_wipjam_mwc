@@ -95,7 +95,7 @@ public class LoginActivity extends Activity {
 		intent.putExtra("MyUser.age", age);
 				
 		startActivity(intent);
-		
+		finish();
 		
 //		//what if we wanted to store the whole object at once?
 //		MyUser user = new MyUser();

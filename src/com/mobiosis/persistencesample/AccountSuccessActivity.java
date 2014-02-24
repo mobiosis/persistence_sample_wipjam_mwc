@@ -32,6 +32,7 @@ public class AccountSuccessActivity extends Activity {
 				addUserToDB(user);
 				
 				Intent intent = new Intent(AccountSuccessActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);
 				finish();
 			}
