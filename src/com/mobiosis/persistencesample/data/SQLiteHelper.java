@@ -18,7 +18,7 @@ public class SQLiteHelper
 	extends OrmLiteSqliteOpenHelper
 {
 	
-	private static final String DATABASE_NAME = "sample_db";
+	private static final String DATABASE_NAME = "sample_db2";
 	private enum DbVersion {
 		Preinit, //ignore, we just need to start from 1
 		Init,
